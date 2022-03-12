@@ -9,7 +9,7 @@ namespace Tomar_Banho.ViewModels
     {
         public AboutViewModel()
         {
-            Title = "About";
+            Title = "App Chuveiro";
             OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
         }
 

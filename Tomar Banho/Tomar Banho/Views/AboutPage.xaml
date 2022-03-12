@@ -18,30 +18,37 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <!--<RowDefinition Height="*" />-->
         </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <StackLayout Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                    <Image Source="chuveiro3.png" VerticalOptions="Center" HeightRequest="64" />
+                <ContentView Padding="9,9,9,9" VerticalOptions="FillAndExpand">
+                    <Image Source="chuveiro.png" VerticalOptions="Center" HeightRequest="125" />
                 </ContentView>
             </StackLayout>
         </StackLayout>
-        <ScrollView Grid.Row="1">
-            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+        <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Padding="5,0,0,5" Spacing="5">
                 <Label Text="Ative seu banho !!!" FontSize="Title"/>
-                <Label Text="Clique no seu nome e ative seu banho, assim o pessoal vai saber que você está tomando banho." FontSize="16" Padding="0,0,0,0"/>
-
-
-
-
-
-                <RadioButton GroupName="grp1" TextColor="Black" Content="15 Minutos"></RadioButton>
-                <RadioButton GroupName="grp1" TextColor="Black" Content="20 Minutos"></RadioButton>
-                <RadioButton GroupName="grp1" TextColor="Black" Content="25 Minutos"></RadioButton>
-
-
-
+                <Label Text="Escolha o tempo e ative seu banho, assim o pessoal vai saber que você está tomando banho." FontSize="16"/>
+        </StackLayout>
+        <StackLayout Grid.Row="2" Padding="5,0,55,5" Spacing="5">
+                <RadioButton GroupName="grp1" CheckedChanged="ChangeTime" TextColor="Black" Content="15 Minutos"></RadioButton>
+                <RadioButton GroupName="grp1" CheckedChanged="ChangeTime" TextColor="Black" Content="20 Minutos"></RadioButton>
+                <RadioButton GroupName="grp1" CheckedChanged="ChangeTime" TextColor="Black" Content="25 Minutos"></RadioButton>
+                <Label x:Name="result" TextColor="Red"/>
+                
+        </StackLayout>
+        
+            <Label Grid.Row="2" Grid.Column="1"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="5,0,5,5" x:Name="contador" TextColor="Green" FontSize="50" Text="000"/>
+        
+        <StackLayout Grid.Row="3" Grid.ColumnSpan="2" Orientation="Vertical" Padding="5,5,5,5" Spacing="5">
                 <Button Text="ATIVAR BANHO" 
                         Clicked="btn_iniciar"
                         TextColor="White"
@@ -56,8 +63,7 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-            </StackLayout>
-        </ScrollView>
+        </StackLayout>
     </Grid>
 
 </ContentPage>
