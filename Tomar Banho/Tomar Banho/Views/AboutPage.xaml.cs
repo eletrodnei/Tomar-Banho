@@ -21,28 +21,25 @@ namespace Tomar_Banho.Views
         {
             
             status.AtivarBanho();
-            ativar();
+            Task ativa = ativar();
+            
             
        
 
         }
-        private async void ativar()
+        private async Task ativar()
         {
-            _canceltoken = new CancellationTokenSource();
-            var token = _canceltoken.Token;
-            _canceltoken.Cancel();
+            //_canceltoken = new CancellationTokenSource();
+            //var token = _canceltoken.Token;
+            //_canceltoken.Cancel();
             contador.Text = "000";
-
-            for (int c = 0; c < 50; c++)
-
-            {
-                
-                await Task.Delay(1000);
-                
-                contador.Text = (Convert.ToInt64(contador.Text) + 1).ToString();
-
-
-            }
+           
+                for (int c = 0; c < 5; c++)
+                {
+                   await Task.Delay(1000);
+                    contador.Text = (Convert.ToInt64(contador.Text) + 1).ToString();
+                }
+           
             //bool estacorrendo = false;
             //int t = (int)status.Tempo1.TotalMinutes;
             //contador.Text = "000";
