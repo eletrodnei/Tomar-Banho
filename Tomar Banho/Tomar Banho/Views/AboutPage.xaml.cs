@@ -1,15 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Threading;
 
 
 namespace Tomar_Banho.Views
 {
     public partial class AboutPage : ContentPage
     {
+        CancellationTokenSource _canceltoken = null;
         Models.StatusBanco status = new Models.StatusBanco();
         public AboutPage()
         {
@@ -25,27 +26,48 @@ namespace Tomar_Banho.Views
        
 
         }
-        private void ativar()
+        private async void ativar()
         {
-            int t = (int)status.Tempo1.TotalMinutes;
+            _canceltoken = new CancellationTokenSource();
+            var token = _canceltoken.Token;
+            _canceltoken.Cancel();
             contador.Text = "000";
+
+            for (int c = 0; c < 50; c++)
+
+            {
+                
+                await Task.Delay(1000);
+                
+                contador.Text = (Convert.ToInt64(contador.Text) + 1).ToString();
+
+
+            }
+            //bool estacorrendo = false;
+            //int t = (int)status.Tempo1.TotalMinutes;
+            //contador.Text = "000";
             //t = 2;
 
-            result.Text = "Chuveiro Ocupado !!!";
+            //result.Text = "Chuveiro Ocupado !!!";
 
-            bool estacorrendo = true;
-            Device.StartTimer(TimeSpan.FromMilliseconds(60000), () =>
-            {
-                contador.Text = (Convert.ToInt64(contador.Text) + 1).ToString();
-                if (Convert.ToInt64(contador.Text) == t)
-                {
-                    contador.Text = "000";
-                    result.Text = "Livre para utilizar";
-                    return estacorrendo = false;
+            //estacorrendo = true;
+            //Device.StartTimer(TimeSpan.FromSeconds(60), () =>
+            //{
+            //    contador.Text = (Convert.ToInt64(contador.Text) + 1).ToString();
 
-                }
-                return estacorrendo;
-            });
+            //    if (Convert.ToInt64(contador.Text) == t)
+            //    {
+            //        contador.Text = "000";
+            //        result.Text = "Livre para utilizar";
+            //        estacorrendo = false;
+            //        return estacorrendo;
+            //    }
+            //    return estacorrendo;
+            //});
+            //Services.Contador contar = new Services.Contador();
+
+            //contar.Contagem(contador, result);
+
         }
 
         private void ChangeTime(object sender, CheckedChangedEventArgs e)
