@@ -23,14 +23,8 @@ namespace Tomar_Banho.Views
         {
             _canceltoken = new CancellationTokenSource();
             status.AtivarBanho();
-            //Task answer = DisplayAlert("Question?", "Would you like to play a game", "Yes", "No");
 
-            //Debug.WriteLine("Answer: " + answer);
-
-            //{
-
-            //}
-            
+            result.Text = "Chuveiro Ocupado !!!";
             _ = ativar(_canceltoken.Token);
             btn_start.IsEnabled = false;
 
@@ -43,7 +37,7 @@ namespace Tomar_Banho.Views
 
             _canceltoken.Cancel();
             btn_start.IsEnabled = true;
-
+            result.Text = "Definindo o Tempo !!";
 
             //_ = ativar(_canceltoken.Token);
 

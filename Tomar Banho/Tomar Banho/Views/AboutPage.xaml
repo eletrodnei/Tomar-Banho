@@ -64,7 +64,7 @@
         </StackLayout>
         <StackLayout Grid.Row="5" Orientation="Vertical" Padding="5,5,5,5" Spacing="5">
 
-                                <Label Text="Copyright - Família TI" FontAttributes="Bold"/>
+                                <Label Text="Copyright - Rodnei Miranda da Silva" FontAttributes="Bold"/>
             
         </StackLayout>
     </Grid>
