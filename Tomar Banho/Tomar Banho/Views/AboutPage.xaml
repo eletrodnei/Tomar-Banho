@@ -51,7 +51,7 @@
                    Padding="5,0,5,5" x:Name="contador" TextColor="Green" FontSize="50" Text="000"/>
         
         <StackLayout Grid.Row="3" Grid.ColumnSpan="2" Orientation="Vertical" Padding="5,5,5,5" Spacing="5">
-                <Button Text="ATIVAR BANHO" 
+                <Button Text="ATIVAR BANHO" x:Name="btn_start"
                         Clicked="btn_iniciar"
                         TextColor="White"
                         BackgroundColor="{StaticResource Primary}"/>

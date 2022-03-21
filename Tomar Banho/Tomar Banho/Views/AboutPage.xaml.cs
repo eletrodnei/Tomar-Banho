@@ -32,7 +32,7 @@ namespace Tomar_Banho.Views
             //}
             
             _ = ativar(_canceltoken.Token);
-           
+            btn_start.IsEnabled = false;
 
 
         }
@@ -42,7 +42,7 @@ namespace Tomar_Banho.Views
             
 
             _canceltoken.Cancel();
-            
+            btn_start.IsEnabled = true;
 
 
             //_ = ativar(_canceltoken.Token);
