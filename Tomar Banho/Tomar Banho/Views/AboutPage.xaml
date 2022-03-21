@@ -21,7 +21,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <!--<RowDefinition Height="*" />-->
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -34,10 +34,11 @@
                 </ContentView>
             </StackLayout>
         </StackLayout>
+        
         <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Padding="5,0,0,5" Spacing="5">
                 <Label Text="Ative seu banho !!!" FontSize="Title"/>
-                <Label Text="Escolha o tempo e ative seu banho, assim o pessoal vai saber que você está tomando banho." FontSize="16"/>
         </StackLayout>
+        
         <StackLayout Grid.Row="2" Padding="5,0,55,5" Spacing="5">
                 <RadioButton GroupName="grp1" CheckedChanged="ChangeTime" TextColor="Black" Content="15 Minutos"></RadioButton>
                 <RadioButton GroupName="grp1" CheckedChanged="ChangeTime" TextColor="Black" Content="20 Minutos"></RadioButton>
@@ -54,16 +55,17 @@
                         Clicked="btn_iniciar"
                         TextColor="White"
                         BackgroundColor="{StaticResource Primary}"/>
+        </StackLayout>
+        <StackLayout Grid.Row="4" Grid.ColumnSpan="2" Orientation="Vertical" Padding="5,5,5,5" Spacing="5">
+            <Button Text="CANCELAR BANHO" 
+                        Clicked="btn_cancelar"
+                        TextColor="White"
+                        BackgroundColor="{StaticResource Primary}"/>
+        </StackLayout>
+        <StackLayout Grid.Row="5" Orientation="Vertical" Padding="5,5,5,5" Spacing="5">
 
-                <Label FontSize="16" Padding="0,24,0,0">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="Copyright - Família TI" FontAttributes="Bold"/>
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                                <Label Text="Copyright - Família TI" FontAttributes="Bold"/>
+            
         </StackLayout>
     </Grid>
 

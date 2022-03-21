@@ -10,32 +10,61 @@ namespace Tomar_Banho.Views
 {
     public partial class AboutPage : ContentPage
     {
-        CancellationTokenSource _canceltoken = null;
+        CancellationTokenSource _canceltoken;
+
         Models.StatusBanco status = new Models.StatusBanco();
         public AboutPage()
         {
             InitializeComponent();
+            
         }
         
         private void btn_iniciar(object sender, EventArgs e)
         {
-            
+            _canceltoken = new CancellationTokenSource();
             status.AtivarBanho();
-            Task ativa = ativar();
+            //Task answer = DisplayAlert("Question?", "Would you like to play a game", "Yes", "No");
+
+            //Debug.WriteLine("Answer: " + answer);
+
+            //{
+
+            //}
             
-            
-       
+            _ = ativar(_canceltoken.Token);
+           
+
 
         }
-        private async Task ativar()
+
+        private void btn_cancelar(object sender, EventArgs e)
         {
-            //_canceltoken = new CancellationTokenSource();
-            //var token = _canceltoken.Token;
-            //_canceltoken.Cancel();
+            
+
+            _canceltoken.Cancel();
+            
+
+
+            //_ = ativar(_canceltoken.Token);
+
+        }
+
+        private async Task ativar(CancellationToken cancelationtoken=default)
+        {
+            
+            
+            
+            
             contador.Text = "000";
            
                 for (int c = 0; c < 5; c++)
                 {
+                if (cancelationtoken.IsCancellationRequested)
+                {
+                    contador.Text = "000";
+                    throw new TaskCanceledException();
+                    
+                }
                    await Task.Delay(1000);
                     contador.Text = (Convert.ToInt64(contador.Text) + 1).ToString();
                 }
@@ -93,5 +122,7 @@ namespace Tomar_Banho.Views
             }
             
         }
+
+        
     }
 }
