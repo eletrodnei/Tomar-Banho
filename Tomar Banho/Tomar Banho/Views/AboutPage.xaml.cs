@@ -21,6 +21,7 @@ namespace Tomar_Banho.Views
         
         private void btn_iniciar(object sender, EventArgs e)
         {
+            Services.MySql.ConectarBD();
             _canceltoken = new CancellationTokenSource();
             status.AtivarBanho();
 
