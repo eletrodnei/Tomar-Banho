@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Tomar_Banho.Views.AboutPage"
              xmlns:vm="clr-namespace:Tomar_Banho.ViewModels"
+             Appearing="ContentPage_Appearing"
+             Disappearing="ContentPage_Disappearing"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -34,38 +36,38 @@
                 </ContentView>
             </StackLayout>
         </StackLayout>
-        
+
         <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Padding="5,0,0,5" Spacing="5">
-                <Label Text="Ative seu banho !!!" FontSize="Title"/>
+            <Label Text="Ative seu banho !!!" FontSize="Title"/>
         </StackLayout>
-        
+
         <StackLayout Grid.Row="2" Padding="5,0,55,5" Spacing="5">
-                <RadioButton GroupName="grp1" CheckedChanged="ChangeTime" TextColor="Black" Content="15 Minutos"></RadioButton>
-                <RadioButton GroupName="grp1" CheckedChanged="ChangeTime" TextColor="Black" Content="20 Minutos"></RadioButton>
-                <RadioButton GroupName="grp1" CheckedChanged="ChangeTime" TextColor="Black" Content="25 Minutos"></RadioButton>
-                <Label x:Name="result" TextColor="Red"/>
-                
+            <RadioButton GroupName="grp1" CheckedChanged="ChangeTime" TextColor="Black" Content="15 Minutos"></RadioButton>
+            <RadioButton GroupName="grp1" CheckedChanged="ChangeTime" TextColor="Black" Content="20 Minutos"></RadioButton>
+            <RadioButton GroupName="grp1" CheckedChanged="ChangeTime" TextColor="Black" Content="25 Minutos"></RadioButton>
+            <Label x:Name="result" TextColor="Red"/>
+
         </StackLayout>
-        
-            <Label Grid.Row="2" Grid.Column="1"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" 
+
+        <Label Grid.Row="2" Grid.Column="1"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" 
                    Padding="5,0,5,5" x:Name="contador" TextColor="Green" FontSize="50" Text="000"/>
-        
+
         <StackLayout Grid.Row="3" Grid.ColumnSpan="2" Orientation="Vertical" Padding="5,5,5,5" Spacing="5">
-                <Button Text="ATIVAR BANHO" x:Name="btn_start"
+            <Button Text="ATIVAR BANHO" x:Name="btn_start"
                         Clicked="btn_iniciar"
                         TextColor="White"
                         BackgroundColor="{StaticResource Primary}"/>
         </StackLayout>
         <StackLayout Grid.Row="4" Grid.ColumnSpan="2" Orientation="Vertical" Padding="5,5,5,5" Spacing="5">
-            <Button Text="CANCELAR BANHO" 
+            <Button Text="CANCELAR BANHO"  x:Name="btn_cancel"
                         Clicked="btn_cancelar"
                         TextColor="White"
                         BackgroundColor="{StaticResource Primary}"/>
         </StackLayout>
         <StackLayout Grid.Row="5" Orientation="Vertical" Padding="5,5,5,5" Spacing="5">
 
-                                <Label Text="Copyright - Rodnei Miranda da Silva" FontAttributes="Bold"/>
-            
+            <Label Text="Copyright - Rodnei Miranda da Silva" FontAttributes="Bold"/>
+
         </StackLayout>
     </Grid>
 

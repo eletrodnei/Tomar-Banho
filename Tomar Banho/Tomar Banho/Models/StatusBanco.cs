@@ -22,12 +22,12 @@ namespace Tomar_Banho.Models
 
         
 
-        private TimeSpan Tempo { get => Tempo1; set => Tempo1 = value; }
-        public TimeSpan Tempo1 { get => tempo; set => tempo = value; }
+        //private TimeSpan Tempo { get => Tempo1; set => Tempo1 = value; }
+        public TimeSpan Tempo { get => tempo; set => tempo = value; }
 
         public void SetarTempo(TimeSpan tmp)
         {
-            this.Tempo1 = tmp;            
+            this.Tempo = tmp;            
         }
         
         public void AtivarBanho()

@@ -2,9 +2,10 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using Tomar_Banho.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using Tomar_Banho.Services;
 
 namespace Tomar_Banho.Views
 {
@@ -16,54 +17,67 @@ namespace Tomar_Banho.Views
         public AboutPage()
         {
             InitializeComponent();
-            
+            _canceltoken = new CancellationTokenSource();
+            btn_cancel.IsEnabled = false;
         }
-        
+
+
+
         private void btn_iniciar(object sender, EventArgs e)
         {
-            Services.MySql.ConectarBD();
             _canceltoken = new CancellationTokenSource();
-            status.AtivarBanho();
+            if (!MySql.VerificaStatus())
+            {
 
-            result.Text = "Chuveiro Ocupado !!!";
-            _ = ativar(_canceltoken.Token);
-            btn_start.IsEnabled = false;
+                MySql.SetaStatus(true);
+                //status.AtivarBanho();
+                result.Text = "Chuveiro Ocupado !!!";
+                _ = Ativar(status.Tempo, _canceltoken.Token);
+                btn_start.IsEnabled = false;
+                btn_cancel.IsEnabled = true;
+            }
+            else
+            {
+                result.Text = "Chuveiro Ocupado !!!";
+            }
 
 
         }
 
         private void btn_cancelar(object sender, EventArgs e)
         {
-            
+
 
             _canceltoken.Cancel();
+            MySql.SetaStatus(false);
+            contador.Text = "000";
             btn_start.IsEnabled = true;
+            btn_cancel.IsEnabled = false;
             result.Text = "Definindo o Tempo !!";
 
             //_ = ativar(_canceltoken.Token);
 
         }
 
-        private async Task ativar(CancellationToken cancelationtoken=default)
+        private async Task Ativar(TimeSpan time, CancellationToken cancelationtoken = default)
         {
-            
-            
-            
-            
             contador.Text = "000";
-           
-                for (int c = 0; c < 5; c++)
-                {
+            for (int c = 0; c < (int)time.TotalSeconds; c++)
+            {
                 if (cancelationtoken.IsCancellationRequested)
                 {
                     contador.Text = "000";
                     throw new TaskCanceledException();
-                    
+
                 }
-                   await Task.Delay(1000);
-                    contador.Text = (Convert.ToInt64(contador.Text) + 1).ToString();
-                }
-           
+                await Task.Delay(1000);
+                contador.Text = (Convert.ToInt64(contador.Text) + 1).ToString();
+            }
+            await Task.Delay(1000);
+            MySql.SetaStatus(false);
+            contador.Text = "000";
+            btn_start.IsEnabled = true;
+            result.Text = "Definindo o Tempo !!";
             //bool estacorrendo = false;
             //int t = (int)status.Tempo1.TotalMinutes;
             //contador.Text = "000";
@@ -93,31 +107,55 @@ namespace Tomar_Banho.Views
 
         private void ChangeTime(object sender, CheckedChangedEventArgs e)
         {
-        RadioButton radioButton = sender as RadioButton;
+            RadioButton radioButton = sender as RadioButton;
 
 
-            result.Text = "Definindo o Tempo !!";            
+            result.Text = "Definindo o Tempo !!";
             if ((string)radioButton.Content == "15 Minutos")
             {
-                TimeSpan tmp = new TimeSpan(0,15,0);
+                TimeSpan tmp = new TimeSpan(0, 15, 0);
                 status.SetarTempo(tmp);
-            
 
-               
-                
-            }else if((string)radioButton.Content == "20 Minutos")
+
+
+
+            }
+            else if ((string)radioButton.Content == "20 Minutos")
             {
                 TimeSpan tmp = new TimeSpan(0, 20, 0);
                 status.SetarTempo(tmp);
-                
-            }else if((string)radioButton.Content == "25 Minutos")
+
+            }
+            else if ((string)radioButton.Content == "25 Minutos")
             {
                 TimeSpan tmp = new TimeSpan(0, 25, 0);
                 status.SetarTempo(tmp);
             }
-            
+
         }
 
-        
+        private void ContentPage_Appearing(object sender, EventArgs e)
+        {
+            if (MySql.VerificaStatus())
+            {
+                btn_start.IsEnabled = false;
+                btn_cancel.IsEnabled = false;
+                result.Text = "Chuveiro Ocupado !!!";
+            }
+            else
+            {
+                btn_start.IsEnabled = true;
+                result.Text = "Defina o Tempo !!!";
+            }
+        }
+
+        private void ContentPage_Disappearing(object sender, EventArgs e)
+        {
+            if (MySql.VerificaStatus() & (btn_cancel.IsEnabled = true))
+            {
+                _canceltoken.Cancel();
+                MySql.SetaStatus(false);
+            }
+        }
     }
 }
