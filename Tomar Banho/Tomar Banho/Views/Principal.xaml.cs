@@ -6,22 +6,35 @@ using Tomar_Banho.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Tomar_Banho.Services;
+using Android.Util;
+using Java.Util.Logging;
 
 namespace Tomar_Banho.Views
 {
     public partial class AboutPage : ContentPage
     {
         CancellationTokenSource _canceltoken;
-
         Models.StatusBanco status = new Models.StatusBanco();
+        //bool _statusdathread;
+
         public AboutPage()
         {
             InitializeComponent();
             _canceltoken = new CancellationTokenSource();
             btn_cancel.IsEnabled = false;
+            //Thread ciclo = new Thread(VerificaStatusThread);
+            //ciclo.Start();
         }
 
-
+        //private void VerificaStatusThread()
+        //{
+        //    for (int i = 0; i < 10; i = 0)
+        //    {
+        //        _statusdathread = MySql.VerificaStatus();
+        //        Console.WriteLine(_statusdathread);
+        //        Thread.Sleep(5000);
+        //    }
+        //}
 
         private void btn_iniciar(object sender, EventArgs e)
         {
@@ -145,17 +158,30 @@ namespace Tomar_Banho.Views
             else
             {
                 btn_start.IsEnabled = true;
+                btn_cancel.IsEnabled = false;
                 result.Text = "Defina o Tempo !!!";
             }
         }
 
         private void ContentPage_Disappearing(object sender, EventArgs e)
         {
-            if (MySql.VerificaStatus() & (btn_cancel.IsEnabled = true))
+            
+            if (btn_cancel.IsEnabled)
             {
-                _canceltoken.Cancel();
+
+                //RegistraLog.Log(String.Format($"{"Log criado em "} : {DateTime.Now}"), "ArquivoLog");
+                //RegistraLog.Log("Registro de log de auditoria");
+
+
+                Console.WriteLine("cheguei antes do set false");
                 MySql.SetaStatus(false);
+                _canceltoken.Cancel();
+
+                Console.WriteLine("cheguei após set false dentro da chave");
+
+
             }
+            Console.WriteLine("cheguei após set false fora da chave fechando metodo");
         }
     }
 }

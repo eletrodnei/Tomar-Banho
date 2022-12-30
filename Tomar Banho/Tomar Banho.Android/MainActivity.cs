@@ -4,6 +4,9 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using AndroidX.Core.App;
+using AndroidX.Core.Content;
+using Android;
 
 namespace Tomar_Banho.Droid
 {
